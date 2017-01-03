@@ -1,0 +1,64 @@
+body { 
+	background-color: #eeeeee;
+}
+
+#menuContainer  {	
+	margin-top: 3em;
+	background: url("../images/nav-bg.png") no-repeat scroll 0 -1px transparent;
+	height: 38px;	
+	margin-left: 1em;
+}
+
+ul#menu {
+    list-style:none;     
+}
+ul#menu li{
+   border-right: 1px solid white;
+   	color: #FFFFFF;
+   	float: left;	
+           height: 20px;
+           padding: 0.5em 2.5em;
+           cursor:pointer;       
+           font-size: 16px;
+        font-weight: bold;  
+        position:relative;
+        z-index:5;
+}
+ul#menu li.backLava {
+    background: url("../images/nav-sprite-default.png") repeat-x scroll 0 -72px #2A2A2A;
+   
+}
+
+div.pageContent {	
+	margin-left: 1.5em;
+	margin-right: 2.5em;
+	margin-top: 2.5em;
+        padding: 1em;
+        border-color: #CCCCCC;
+        border-style: solid;
+        border-width: 1px;
+        border-radius: 5px 5px 5px 5px;
+}
+
+.data {
+	padding:1em;
+}
+ol#activitiesList li{
+	margin-bottom: 0.75em;
+	list-style: upper-alpha outside none;
+}
+
+ol#governingBody li {
+	margin-bottom: 0.75em;
+	list-style: lower-alpha outside none;
+}
+
+#imageContainer {
+	text-align:center;
+}
+
+#imageContainer img {
+	padding:1em;
+	border:1px solid black;
+}
+

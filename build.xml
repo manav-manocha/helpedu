@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<project name="HelpEdu" default="minify">
+	<property file="build.properties" />
+
+	<path id="task.classpath">
+		<pathelement location="${yuicompressor.jar}" />
+		<pathelement location="${yuicompressor.anttask.jar}" />
+	</path>
+
+	<taskdef name="yui-compressor" classname="net.noha.tools.ant.yuicompressor.tasks.YuiCompressorTask">
+		<classpath refid="task.classpath" />
+	</taskdef>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete dir="${dest.dir}" />
+	</target>
+
+	<target name="init" depends="clean">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${dest.dir}" />
+	</target>
+
+	<target name="concat-js">
+		<property name="libs.file" location="${build.dir}/libs-join.js" />
+		<echo message="Building ${libs.file}" />
+		<concat destfile="${libs.file}">
+			<fileset dir="scripts/" includes="jquery-1.7.2.js" />
+			<fileset dir="scripts/" includes="jquery.easing.1.3.js" />
+			<fileset dir="scripts/" includes="jquery.lavalamp-1.3.5.js" />
+			<fileset dir="scripts/" includes="facebox.js" />
+			<fileset dir="scripts/" includes="main.js" />			
+		</concat>		
+    	</target>
+
+	<target name="concat-css">
+		<property name="styles.file" location="${build.dir}/styles-join.css" />
+		<echo message="Building ${styles.file}" />
+		<concat destfile="${styles.file}">
+			<fileset dir="styles/" includes="*.css"/>
+		</concat>
+    </target>
+
+    <target name="minify-js" depends="concat-js">
+		<yui-compressor warn="false" fromDir="${build.dir}" toDir="${dest.dir}">
+			<include name="*.js" />
+		</yui-compressor>
+    </target>
+
+    <target name="minify-css" depends="concat-css">
+		<yui-compressor warn="false"  fromDir="${build.dir}" toDir="${dest.dir}">
+			<include name="*.css" />
+		</yui-compressor>
+    </target>
+
+    <target name="minify" depends="init">
+   		<antcall target="minify-js"/>
+   		<antcall target="minify-css"/>
+    </target>
+    
+    <target name="build">
+	<antcall target="minify"/>	
+	<delete dir="${prod.dir}" />
+	<mkdir dir="${prod.dir}" />
+	<copy todir="${prod.dir}">		
+		<fileset dir=".">
+			<include name="main.html"/>	
+			<include name="minified/**"/>	
+			<include name="images/**"/>
+            	</fileset>
+    	</copy>
+    </target>
+    
+    
+   
+</project>
